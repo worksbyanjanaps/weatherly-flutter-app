@@ -5,7 +5,7 @@ import 'package:weatherly/weather.dart';
 class WeatherResultScreen extends StatefulWidget {
   final dynamic LocationWeather;
 
-  WeatherResultScreen({super.key,required this.LocationWeather});
+  const WeatherResultScreen({super.key,required this.LocationWeather});
 
   @override
   State<WeatherResultScreen> createState() => _WeatherResultScreenState();
@@ -39,8 +39,7 @@ class _WeatherResultScreenState extends State<WeatherResultScreen> {
 
     setState(() {
       countryName = weatherData['sys']['country'] ?? '';
-      weatherConditions =
-          weatherData['weather'][0]['main'] ?? '';
+      weatherConditions = weatherData['weather'][0]['main'] ?? '';
 
       temperature = temp.toInt();
       weatherConditionCode = conditionCode;
@@ -55,55 +54,6 @@ class _WeatherResultScreenState extends State<WeatherResultScreen> {
     debugPrint('Icon: $weatherIcon');
     debugPrint('Message: $weatherMessage');
   }
-
-  // void updateUI(dynamic weatherData) {
-  //   if (weatherData == null) {
-  //     debugPrint('Weather data is null');
-  //     return;
-  //   }
-  //
-  //   final num temp = weatherData['main']['temp'] as num;
-  //   final int temperature = temp.toInt();
-  //   final int weatherConditionCode = weatherData['weather'][0]['id'] as int;
-  //   final String countryName = weatherData['sys']['country'] ?? '';
-  //   final String weatherConditions = weatherData['weather'][0]['main'] ?? '';
-  //
-  //   setState(() {
-  //     weatherIcon = weatherModel.getWeatherIcon(weatherConditionCode);
-  //     weatherMessage = weatherModel.getMessage(temperature);
-  //   });
-  //
-  //   debugPrint('Country: $countryName');
-  //   debugPrint('Weather: $weatherConditions');
-  //   debugPrint('Temperature: $temperature');
-  // }
-
-  // void updateUI(dynamic WeatherData) {
-  //   setState(() {
-  //
-  //     if (WeatherData == null) {
-  //       temperature = 0;
-  //       weatherMessage = 'Unable to get data from server';
-  //       countryName = 'An error occured';
-  //       return;
-  //     }
-  //     countryName =   WeatherData['sys']['country'];
-  //     weatherConditions =  WeatherData['weather'][0]['main'];
-  //     double temp =  WeatherData['main']['temp'];
-  //     temperature = temp.toInt();
-  //     weatherConditionCode = WeatherData['weather'][0]['id'];
-  //     weatherIcon = weatherModel.getWeatherIcon(weatherConditionCode);
-  //     weatherMessage = weatherModel.getMessage(temperature);
-  //
-  //     temperature = temp.toInt();
-  //     print(countryName);
-  //     print(weatherConditions);
-  //     print(temperature);
-  //     print(weatherConditionCode);
-  //     print(weatherIcon);
-  //     print(weatherMessage);
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -132,9 +82,8 @@ class _WeatherResultScreenState extends State<WeatherResultScreen> {
                         color: Color(0xFF0B0D1E),
                         borderRadius: BorderRadius.circular(25),
                       ),
-
-
-                      child: Icon(Icons.location_on,color: Colors.grey,),
+                     child: IconButton(onPressed: () {Navigator.pop(context);}, icon: Icon(Icons.arrow_back,)),
+                     // child: Icon(Icons.location_on,color: Colors.grey,),
                     ),
                   ),
                 ],
@@ -160,15 +109,19 @@ class _WeatherResultScreenState extends State<WeatherResultScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      //child: Image.asset('assets/images/cloudIntro.png',height: 300,),
-                      child: Text(
-                        weatherIcon,
-                        //'🌧️',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 150.0
-                        ),
+                      child: Image.asset(
+                        'assets/images/cloudIntro.png',
+                        fit: BoxFit.cover,
+                        height: 300,
                       ),
+                      // child: Text(
+                      //   weatherIcon,
+                      //   //'🌧️',
+                      //   textAlign: TextAlign.center,
+                      //   style: TextStyle(
+                      //     fontSize: 150.0
+                      //   ),
+                      // ),
                     ),
                     Text(
                       weatherIcon,

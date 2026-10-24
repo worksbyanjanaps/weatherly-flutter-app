@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weatherly/loading_screen.dart';
+import 'package:weatherly/weather_result.dart';
 
 void main() {
   runApp(Weatherly());
@@ -17,7 +18,13 @@ class _WeatherlyState extends State<Weatherly> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: LoadingScreen(),
+      routes:  {
+        '/': (context) => const LoadingScreen(),
+        '/loading': (context) => WeatherResultScreen(LocationWeather: null,)
+
+      },
+      initialRoute: '/',
+      // home: LoadingScreen(),
     );
   }
 }
